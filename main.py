@@ -27,15 +27,19 @@ async def websocket_endpoint(websocket: WebSocket):
                 username = data.get("username", "anon")
                 content = data.get("content")
                 timestamp = data.get("timestamp")
+                color = data.get("color", "#11BC61")
                 if content is None or timestamp is None:
                     continue  # Ignorar mensajes sin contenido o sin timestamp
-                # Convertir el timestamp numérico a una cadena legible
-                timestamp_str = datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
-                message = f"{timestamp_str} - {username}: {content}"
+                message = {
+                    "timestamp": timestamp,
+                    "username": username,
+                    "color": color,
+                    "content": content
+                }
                 # Enviar el mensaje a todos los clientes conectados
                 for connection in connections:
                     if connection != websocket:
-                        await connection.send_text(message)
+                        await connection.send_json(message)
             except ValueError:
                 await websocket.send_text("Error: Invalid JSON received.")
             except Exception as e:
