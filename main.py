@@ -49,3 +49,7 @@ async def websocket_endpoint(websocket: WebSocket):
     except Exception as e:
         connections.remove(websocket)
         print(f"Error: {str(e)}")
+        
+@app.get("/ping")
+async def pong():
+    return {"ping": "pong"}
