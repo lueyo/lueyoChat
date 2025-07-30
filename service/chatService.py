@@ -34,7 +34,7 @@ class ChatService:
             connected_users = len(self.rooms[room_uuid])
             # Broadcast user disconnected message
             message = {
-                "timestamp": datetime.datetime.utcnow().isoformat(),
+                "timestamp": str(int(time.time())),
                 "username": "Room",
                 "color": "#5E59EE",
                 "content": f"User disconnected, user online {connected_users}"
