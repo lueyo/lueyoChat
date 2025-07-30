@@ -21,7 +21,7 @@ class ChatService:
         # Broadcast new user connected message
         connected_users = len(self.rooms[room_uuid])
         message = {
-            "timestamp": str(int(time.time())),
+            "timestamp": str(time.time()),
             "username": "Room",
             "color": "#5E59EE",
             "content": f"New User connected, user online {connected_users}"
@@ -34,7 +34,7 @@ class ChatService:
             connected_users = len(self.rooms[room_uuid])
             # Broadcast user disconnected message
             message = {
-                "timestamp": str(int(time.time())),
+                "timestamp": str(time.time()),
                 "username": "Room",
                 "color": "#5E59EE",
                 "content": f"User disconnected, user online {connected_users}"
