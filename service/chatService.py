@@ -66,7 +66,7 @@ class ChatService:
                     data = await websocket.receive_json()
                     username = data.get("username", "anon")
                     content = data.get("content")
-                    timestamp = data.get("timestamp")
+                    timestamp = str(time.time()) # data.get("timestamp")
                     color = data.get("color", "#11BC61")
                     if content is None or timestamp is None:
                         continue  # Ignore messages without content or timestamp
